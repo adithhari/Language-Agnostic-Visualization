@@ -2,7 +2,10 @@ import uuid
 import subprocess
 from pathlib import Path
 
+"""Utility to execute Python scripts and save Plotly visualizations as HTML files."""
+
 def run_python_code(code: str) -> str:
+    """Runs Python code that generates a Plotly figure and saves it as an HTML file."""
     output_file = f"{uuid.uuid4()}.html"
     temp_file = Path(f"/tmp/{uuid.uuid4()}.py")
     

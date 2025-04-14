@@ -1,11 +1,36 @@
+/**
+ * Home page component for the Language-Agnostic Visualization App.
+ * Allows users to input Python or R scripts and generate visualizations via backend API.
+ * Displays the generated visualization using an iframe.
+ */
 import React, { useState } from 'react';
 import axios from 'axios';
 
+/**
+ * React functional component for rendering the homepage UI.
+ * Includes language selection, code input area, and an iframe for displaying the result.
+ */
 const Home = () => {
+  /**
+   * The selected programming language ("python" or "r") for the script.
+   */
   const [language, setLanguage] = useState('python');
+  
+  /**
+   * The user-provided code/script to be sent to the backend for visualization.
+   */
   const [code, setCode] = useState('');
+  
+  /**
+   * The URL of the generated visualization returned from the backend.
+   * Used to embed the visualization in an iframe.
+   */
   const [vizUrl, setVizUrl] = useState(''); // if backend returns a URL
 
+  /**
+   * Sends the user's code and selected language to the backend to generate a visualization.
+   * Updates the state with the returned visualization URL or shows an error message on failure.
+   */
   const handleGenerate = async () => {
     try {
       const formData = new FormData();

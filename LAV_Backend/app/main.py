@@ -1,3 +1,4 @@
+"""FastAPI backend entry point for generating visualizations from Python or R scripts."""
 from fastapi import FastAPI, Form
 from fastapi.staticfiles import StaticFiles
 from app.runner.python_runner import run_python_code
@@ -19,6 +20,7 @@ app.add_middleware(
 
 @app.post("/generate-visualization")
 async def generate(code: str = Form(...), language: str = Form(...)):
+    """API endpoint to receive code and language, run the script, and return the visualization URL."""
     print("LANGUAGE RECEIVED:", language)
     if language == "python":
         output_path = run_python_code(code)
@@ -28,4 +30,3 @@ async def generate(code: str = Form(...), language: str = Form(...)):
         return {"error": "Unsupported language"}
 
     return {"url": f"/static/{output_path}"}
-
