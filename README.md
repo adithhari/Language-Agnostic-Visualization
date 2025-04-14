@@ -4,6 +4,12 @@ This project enables users to write Python or R scripts and visualize them throu
 
 ---
 
+<video width="620" controls>
+  <source src="Lan-Viz_Adith.mp4" type="video/mp4">
+</video>
+
+---
+
 # Language-Agnostic Visualization Frontend
 
 This is the **ReactJS-based frontend** for the Language-Agnostic Visualization Web Application. It allows users to submit Python or R scripts and visualize the results (static, interactive, or 3D) via an intuitive UI.
@@ -13,9 +19,13 @@ This is the **ReactJS-based frontend** for the Language-Agnostic Visualization W
 ## Tech Stack
 
 - **ReactJS** (with Hooks)
+
 - **TypeScript**
+
 - **Tailwind CSS** for utility-first styling
+
 - **Axios** for API calls
+
 - **Vite** (for fast build and dev environment)
 
 ---
@@ -23,8 +33,11 @@ This is the **ReactJS-based frontend** for the Language-Agnostic Visualization W
 ## UI Design Overview
 
 - Dropdown menu to select the language (Python / R)
+
 - Textarea for users to write visualization scripts
+
 - A `Generate` button to submit the code
+
 - Automatically renders the resulting visualization as an `<iframe>`
 
 ---
@@ -32,8 +45,11 @@ This is the **ReactJS-based frontend** for the Language-Agnostic Visualization W
 ## How to Run
 
 ```bash
-npm install
-npm run dev
+
+npm  install
+
+npm  run  dev
+
 ```
 
 Your frontend would be running in http://localhost:5173/.
@@ -47,12 +63,15 @@ Make sure your backend is running at http://127.0.0.1:8000.
 This app sends a POST request to:
 
 ```
+
 POST /generate-visualization
+
 ```
 
 **FormData payload:**
 
 - `code` → Script string (Python or R)
+
 - `language` → `"python"` or `"r"`
 
 ---
@@ -66,9 +85,13 @@ This is the Dockerized **FastAPI backend** for the Language-Agnostic Visualizati
 ## Tech Stack
 
 - **FastAPI** (Python)
+
 - **R + ggplot2 / plotly**
+
 - **Docker** for containerized execution
+
 - **Subprocess-based code execution**
+
 - **Pandoc** for R HTML widget export
 
 ---
@@ -78,8 +101,11 @@ This is the Dockerized **FastAPI backend** for the Language-Agnostic Visualizati
 ### Files
 
 - `Dockerfile` → sets up Python + R + required libs
+
 - `app/` → FastAPI backend code
+
 - `app/runner/` → logic to run Python & R scripts
+
 - `app/static/` → stores generated visualizations
 
 ---
@@ -87,11 +113,17 @@ This is the Dockerized **FastAPI backend** for the Language-Agnostic Visualizati
 ## How to Build and Run
 
 ```bash
+
 # Build the image
-docker build -t langviz-backend .
+
+docker  build  -t  langviz-backend  .
+
+
 
 # Run the container
-docker run -p 8000:8000 langviz-backend
+
+docker  run  -p  8000:8000  langviz-backend
+
 ```
 
 ---
@@ -99,12 +131,15 @@ docker run -p 8000:8000 langviz-backend
 ## Exposed API Endpoint
 
 ```
+
 POST /generate-visualization
+
 ```
 
 ### FormData Payload:
 
 - `code` → Python or R script string
+
 - `language` → `"python"` or `"r"`
 
 ### Response:
@@ -120,25 +155,38 @@ POST /generate-visualization
 ### ✅ Python Example
 
 ```python
+
 import plotly.express as px
+
 fig = px.bar(x=["A", "B", "C"], y=[10, 5, 7])
+
 ```
 
 ### ✅ R Example
 
 ```r
+
 library(plotly)
-fig <- plot_ly(x = c("A", "B", "C"), y = c(10, 5, 7), type = "bar")
+
+fig <-  plot_ly(x  =  c("A", "B", "C"), y  =  c(10, 5, 7), type  =  "bar")
+
 ```
 
 ### ✅ R 3D Example
 
 ```r
+
 library(plotly)
-x <- seq(-10, 10, length.out = 30)
+
+x <-  seq(-10, 10, length.out  =  30)
+
 y <- x
-z <- outer(x, y, function(x, y) cos(sqrt(x^2 + y^2)))
-fig <- plot_ly(z = ~z, type = "surface")
+
+z <-  outer(x, y, function(x, y) cos(sqrt(x^2  + y^2)))
+
+fig <-  plot_ly(z  =  ~z, type  =  "surface")
+
+
 
 ```
 
@@ -151,7 +199,9 @@ fig <- plot_ly(z = ~z, type = "surface")
 **Fix:** Installed required system packages:
 
 ```dockerfile
+
 $ apt-get install -y libcurl4-openssl-dev libssl-dev
+
 ```
 
 ### ❌ `pandoc` missing for R `htmlwidgets`
@@ -159,7 +209,9 @@ $ apt-get install -y libcurl4-openssl-dev libssl-dev
 **Fix:** Added to Dockerfile:
 
 ```dockerfile
+
 $ apt-get install -y pandoc
+
 ```
 
 ---
