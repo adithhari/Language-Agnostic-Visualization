@@ -4,9 +4,7 @@ This project enables users to write Python or R scripts and visualize them throu
 
 ---
 
-<video width="620" controls>
-  <source src="Lang-Viz_Adith.gif" type="video/mp4">
-</video>
+<img src="Lang-Viz_Adith.gif" width="620" />
 
 ---
 
